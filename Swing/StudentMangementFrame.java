@@ -1,8 +1,6 @@
 package Swing;
 
 import java.awt.Color;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class StudentMangementFrame extends JFrame {
@@ -12,6 +10,10 @@ public class StudentMangementFrame extends JFrame {
         this.setTitle("Student Mangement System");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.getContentPane().setBackground(new Color(229, 255, 204));
+        this.getContentPane().setBackground(new Color(229, 230, 204));
+    }
+
+    public static void main(String[] args) {
+        StudentMangementFrame frame = new StudentMangementFrame();
     }
 }
