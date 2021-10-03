@@ -10,6 +10,7 @@ import javax.swing.border.Border;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 
 public class ButtonSwing {
@@ -69,6 +70,7 @@ public class ButtonSwing {
         label.add(button2);
         frame = new StudentMangementFrame();
         frame.add(label, BorderLayout.CENTER);
+        // frame.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
     }
 
 }
