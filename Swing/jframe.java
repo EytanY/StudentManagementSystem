@@ -9,7 +9,7 @@ public class jframe {
 
         JFrame frame = new JFrame(); // Create Frame\Stage
         frame.setVisible(true); // make frame visible
-        frame.setSize(550, 650); // size of frame
+        frame.setSize(750, 750); // size of frame
         frame.setTitle("Student Mangement System"); // title for window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // after exit the program stop running
         frame.setResizable(false); // not allowed to change the size of the window
