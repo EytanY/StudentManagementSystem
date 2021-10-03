@@ -6,9 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.Border;
-import javax.swing.plaf.DimensionUIResource;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,6 +15,7 @@ import java.awt.Font;
 public class ButtonSwing {
     public static JButton button;
     public static JButton button2;
+    public static JLabel label;
     public static JLabel label2;
     public static StudentMangementFrame frame;
 
@@ -65,7 +64,7 @@ public class ButtonSwing {
             System.out.println("Press on Add Student");
         });
 
-        JLabel label = getMenuJLabel();
+        label = getMenuJLabel();
         label.add(button);
         label.add(button2);
         frame = new StudentMangementFrame();
