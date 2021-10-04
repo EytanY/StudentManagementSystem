@@ -1,15 +1,20 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.BorderLayout;
 import Controller.Controller;
+import Model.Student;
 import Model.StudentMangement;
+import Model.Person.Sex;
 import View.View;
-
 import java.awt.Color;
 
 public class mainApp {
     public static void main(String[] args) {
         View view = new View();
         StudentMangement studentMangement = new StudentMangement();
+        studentMangement.addStudent(
+                new Student("Eytan", "Yeg", "316443878", null, "null", "null", Sex.Male, "etan173@gmail.com"));
         Controller controller = new Controller(view, studentMangement);
 
         JLabel labelForSearch = controller.getLabelForSearch();
@@ -21,6 +26,30 @@ public class mainApp {
             JFrame searchFrame = new JFrame();
             newFrame(searchFrame);
             searchFrame.add(labelForSearch);
+
+            controller.getEnterButton().addActionListener(search -> {
+                try {
+                    Student student = controller.searchStudent();
+                    searchFrame.dispose();
+                    JFrame studentFrame = new JFrame();
+                    newFrame(studentFrame);
+                    studentFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+
+                    controller.getMenuButton().addActionListener(menu -> {
+                        studentFrame.dispose();
+                        frame.show();
+                    });
+
+                    controller.getCursesButton().addActionListener(cursesButto -> {
+                        // Panel show all Cureses + input - remove or create
+                    });
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, "Invalid Input");
+                    searchFrame.dispose();
+                    frame.show();
+                }
+            });
+
             controller.getEnterButton().addActionListener(search -> {
                 // Do For search
             });

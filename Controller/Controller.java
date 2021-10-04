@@ -2,6 +2,7 @@ package Controller;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import Model.Student;
 import Model.StudentMangement;
@@ -19,10 +20,14 @@ public class Controller {
     public Student searchStudent() throws Exception {
         String id = view.getIdTextField().getText();
         Integer.parseInt(id);
-        if (id.length() != 9)
-            throw new Exception("Invalid id");
         Student student = studentMangementSystem.searchStudentById(id);
+        if (id.length() != 9 || student == null)
+            throw new Exception("Invalid id");
         return student;
+    }
+
+    public JPanel getJPanelStundetInfo(Student student) {
+        return view.getPanelInfo(student);
     }
 
     public JLabel getLabelForMenu() {
@@ -43,5 +48,13 @@ public class Controller {
 
     public JButton getEnterButton() {
         return view.getEnterButton();
+    }
+
+    public JButton getMenuButton() {
+        return view.getMenuButton();
+    }
+
+    public JButton getCursesButton() {
+        return view.getCursesButton();
     }
 }
