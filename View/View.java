@@ -1,27 +1,20 @@
 package View;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-<<<<<<< HEAD:View/View.java
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class View {
-	private JFMenu menuFrame;
-	private JFSearch searchFrame;
-
-	public JFMenu getMenuFrame() {
-		return menuFrame;
-	}
-
-	public JFSearch getSearchFrame() {
-		return searchFrame;
-=======
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.time.LocalDate;
 
-public class ViewMenu {
+public class View {
 	private JButton buttonSearchStudent = getButtonForMenu("Search Student");
 	private JButton buttonAddStudent = getButtonForMenu("Add Student");
+	private JButton buttonEnter = getButtonForMenu("Search");
+
+	private JTextField idTextField = new JTextField();
 
 	public JLabel getJLabelForMenu() {
 		LocalDate cuurentDate = LocalDate.now();
@@ -44,6 +37,30 @@ public class ViewMenu {
 		return label;
 	}
 
+	public JLabel getLabelForSearchStudent() {
+		JLabel label = new JLabel();
+		label.setText("Enter Student's Id:");
+
+		ImageIcon image = new ImageIcon(
+				"C:\\Users\\etan1\\OneDrive\\מסמכים\\GitHub\\StudentMangement\\StudentManagement\\Photos\\search.png");
+		label.setIcon(image);
+
+		idTextField.setText("");
+		idTextField.setBounds(100, 320, 120, 20);
+		label.add(idTextField);
+
+		buttonEnter.setBounds(250, 320, 100, 20);
+		label.add(buttonEnter);
+
+		label.setHorizontalTextPosition(JLabel.CENTER);
+		label.setVerticalTextPosition(JLabel.TOP);
+		label.setVerticalAlignment(JLabel.TOP);
+		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setFont(new Font("MV Boli", Font.PLAIN, 30));
+
+		return label;
+	}
+
 	public JButton getButtonForMenu(String text) {
 		JButton button = new JButton();
 		button.setText(text);
@@ -51,30 +68,26 @@ public class ViewMenu {
 		button.setBorder(BorderFactory.createEtchedBorder());
 		button.setFont(new Font("Monospaced", Font.BOLD, 15));
 		return button;
->>>>>>> parent of a2c60f3 (Controller):View/ViewMenu.java
 	}
 
 	public JButton getSearchStudentButton() {
-		return menuFrame.getSearchStudentButton();
+		return buttonSearchStudent;
 	}
 
 	public JButton getAddStudentButton() {
-		return menuFrame.getAddStudentButton();
+		return buttonAddStudent;
 	}
 
-<<<<<<< HEAD:View/View.java
 	public JButton getEnterButton() {
-		return searchFrame.getEnterButton();
+		return buttonEnter;
 	}
 
 	public JTextField getIdTextField() {
-		return searchFrame.getIdTextField();
+		return idTextField;
 	}
 
 	public void resetIdTextField() {
-		searchFrame.setIdTextField("");
+		idTextField.setText("");
 	}
 
-=======
->>>>>>> parent of a2c60f3 (Controller):View/ViewMenu.java
 }

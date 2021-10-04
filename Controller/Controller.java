@@ -1,13 +1,10 @@
 package Controller;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Model.Student;
 import Model.StudentMangement;
-import View.JFMenu;
-import View.JFSearch;
 import View.View;
 
 public class Controller {
@@ -28,12 +25,12 @@ public class Controller {
         return student;
     }
 
-    public JFMenu getMenuFrame() {
-        return view.getMenuFrame();
+    public JLabel getLabelForMenu() {
+        return view.getJLabelForMenu();
     }
 
-    public JFSearch getSearchFrame() {
-        return view.getSearchFrame();
+    public JLabel getLabelForSearch() {
+        return view.getLabelForSearchStudent();
     }
 
     public JButton getSearchStudentButton() {
