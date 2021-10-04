@@ -1,9 +1,13 @@
 package Controller;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import Model.Student;
 import Model.StudentMangement;
+import View.JFMenu;
+import View.JFSearch;
 import View.View;
 
 public class Controller {
@@ -22,6 +26,14 @@ public class Controller {
             throw new Exception("Invalid id");
         Student student = studentMangementSystem.searchStudentById(id);
         return student;
+    }
+
+    public JFMenu getMenuFrame() {
+        return view.getMenuFrame();
+    }
+
+    public JFSearch getSearchFrame() {
+        return view.getSearchFrame();
     }
 
     public JButton getSearchStudentButton() {
