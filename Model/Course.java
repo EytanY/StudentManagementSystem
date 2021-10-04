@@ -12,7 +12,7 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Name:" + name + " ,Grade:" + finalGrade;
+        return "Course:" + name + " ,Grade:" + finalGrade;
     }
 
     @Override

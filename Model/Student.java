@@ -16,11 +16,6 @@ public class Student extends Person {
         averageGrade = 0;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + " ,Average:" + averageGrade;
-    }
-
     public void clacAverage() {
         double average = 0;
         for (Course c : courses) {

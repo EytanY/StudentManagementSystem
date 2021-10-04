@@ -1,17 +1,11 @@
 package View;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.*;
+import javax.swing.*;
+import Model.Course;
 import Model.Student;
-import java.awt.Font;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class View {
 	private JButton buttonSearchStudent = getButtonForMenu("Search Student");
@@ -19,7 +13,10 @@ public class View {
 	private JButton buttonEnter = getButtonForMenu("Search");
 	private JButton buttonMenu = getButtonForMenu("Menu");
 	private JButton buttonCurses = getButtonForMenu("Curses");
-
+	private JButton buttonAddCurses = getButtonForMenu("Add curses");
+	private JButton buttonRemoveCurses = getButtonForMenu("Remove curses");
+	private Color backgroundColoer = new Color(229, 230, 204);
+	private Font font = new Font("Monospaced", Font.BOLD, 18);
 	private JTextField idTextField = new JTextField();
 
 	public JLabel getJLabelForMenu() {
@@ -67,6 +64,31 @@ public class View {
 		return label;
 	}
 
+	public JScrollPane getPanelOfCurses(Student student) {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(25, 40));
+		panel.setBackground(backgroundColoer);
+
+		panel.add(buttonMenu);
+		panel.add(buttonAddCurses);
+		panel.add(buttonRemoveCurses);
+
+		JLabel courseLabel = new JLabel(student + "");
+		courseLabel.setFont(font);
+		panel.add(courseLabel);
+
+		ArrayList<Course> curses = student.getCourses();
+		for (Course c : curses) {
+			JLabel label = new JLabel("[" + (curses.indexOf(c) + 1) + "] - " + c + "");
+			label.setFont(font);
+			panel.add(label);
+		}
+		JScrollPane sp = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		sp.setBackground(backgroundColoer);
+		return sp;
+	}
+
 	public JButton getButtonForMenu(String text) {
 		JButton button = new JButton();
 		button.setText(text);
@@ -80,7 +102,6 @@ public class View {
 		JPanel panel = new JPanel();
 		panel.setBounds(100, 100, 400, 400);
 		panel.setLayout(null);
-		Font font = new Font("Monospaced", Font.BOLD, 18);
 
 		JLabel infoStundetlabel = new JLabel("Information:");
 		infoStundetlabel.setFont(font);
@@ -108,8 +129,7 @@ public class View {
 		buttonCurses.setBounds(200, 430, 100, 40);
 		panel.add(buttonMenu);
 		panel.add(buttonCurses);
-		panel.setBackground(new Color(229, 230, 204));
-		panel.setFont(new Font("Monospaced", Font.BOLD, 15));
+		panel.setBackground(backgroundColoer);
 		return panel;
 	}
 
@@ -131,6 +151,14 @@ public class View {
 
 	public JButton getCursesButton() {
 		return buttonCurses;
+	}
+
+	public JButton getAddCursesButton() {
+		return buttonAddCurses;
+	}
+
+	public JButton getRemoveButton() {
+		return buttonRemoveCurses;
 	}
 
 	public JTextField getIdTextField() {
