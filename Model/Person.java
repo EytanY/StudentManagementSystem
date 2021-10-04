@@ -21,7 +21,7 @@ public abstract class Person {
         this.fatherName = fatherName;
         this.motherName = motherName;
         this.sex = sex;
-        age = calcAge();
+        // age = calcAge();
     }
 
     public int calcAge() {
