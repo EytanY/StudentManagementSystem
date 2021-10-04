@@ -1,11 +1,8 @@
 package View;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import java.awt.Font;
 import java.time.LocalDate;
 
@@ -47,7 +44,4 @@ public class JFMenu extends JFStudentManagement {
         return buttonAddStudent;
     }
 
-    public static void main(String[] args) {
-        JFMenu menu = new JFMenu();
-    }
 }
