@@ -147,6 +147,13 @@ public class mainApp {
         controller.getAddStudentButton().addActionListener(e -> {
             // Add Student
         });
+
+        controller.getExitButton().addActionListener(exit -> {
+            // Save 
+            
+            //Exit
+            frame.dispose();
+        });
         frame.add(labelForMenu);
         newFrame(frame);
     }
