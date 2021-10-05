@@ -6,7 +6,7 @@ public class Course {
     private double finalGrade;
 
     public Course(String name, double finalGrade) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.finalGrade = finalGrade;
     }
 

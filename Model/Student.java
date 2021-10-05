@@ -44,11 +44,16 @@ public class Student extends Person {
     }
 
     public Course searchCourseByName(String name) {
+        name = name.toLowerCase();
         for (Course course : courses) {
             if (course.getName().equals(name))
                 return course;
         }
         return null;
+    }
+
+    public boolean removeCourse(Course course) {
+        return courses.remove(course);
     }
 
     public ArrayList<Course> getCourses() {

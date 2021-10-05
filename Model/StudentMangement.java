@@ -26,6 +26,10 @@ public class StudentMangement {
         return student.addCourse(course);
     }
 
+    public boolean removeCourseForStudent(Student student, Course course) {
+        return student.removeCourse(course);
+    }
+
     public Student searchStudentById(String id) {
         for (Student student : students) {
             if (student.getId().equals(id))

@@ -93,6 +93,32 @@ public class mainApp {
                             frame.setVisible(true);
                         });
 
+                        controller.getAddCursesButton().addActionListener(addCourse -> {
+                            // Add Curse
+                            try {
+
+                            } catch (Exception e) {
+                                // TODO: handle exception
+                            }
+                        });
+
+                        controller.getRemoveCursesButton().addActionListener(removeCourse -> {
+                            // Remove course
+                            cursesFrame.dispose();
+                            JFrame cursesRemoveFrame = new JFrame();
+                            newFrame(cursesRemoveFrame);
+                            cursesRemoveFrame.add(controller.getJLabelRemoveCourse());
+
+                            // Remove curse enter
+                            controller.getRemoveCursesEnterButton().addActionListener(removeCourseEnter -> {
+                                if (controller.removeCourse(student))
+                                    JOptionPane.showMessageDialog(null, "Sucsses");
+                                else
+                                    JOptionPane.showMessageDialog(null, "Course not exsit");
+                                cursesRemoveFrame.dispose();
+                                frame.setVisible(true);
+                            });
+                        });
                     });
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(null, "Invalid Input");

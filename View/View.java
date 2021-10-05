@@ -13,11 +13,13 @@ public class View {
 	private JButton buttonEnter = getButtonForMenu("Search");
 	private JButton buttonMenu = getButtonForMenu("Menu");
 	private JButton buttonCurses = getButtonForMenu("Curses");
-	private JButton buttonAddCurses = getButtonForMenu("Add curses");
-	private JButton buttonRemoveCurses = getButtonForMenu("Remove curses");
+	private JButton buttonAddCurses = getButtonForMenu("Add curse");
+	private JButton buttonRemoveCurses = getButtonForMenu("Remove curse");
+	private JButton buttonRemoveCursesEnter = getButtonForMenu("Remove curse");
 	private Color backgroundColoer = new Color(229, 230, 204);
 	private Font font = new Font("Monospaced", Font.BOLD, 18);
 	private JTextField idTextField = new JTextField();
+	private JTextField firstNameTextField = new JTextField();
 
 	public JLabel getJLabelForMenu() {
 		LocalDate cuurentDate = LocalDate.now();
@@ -87,6 +89,21 @@ public class View {
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setBackground(backgroundColoer);
 		return sp;
+	}
+
+	public JLabel getLabelRemoveCourse() {
+
+		firstNameTextField.setBounds(20, 50, 100, 40);
+		buttonRemoveCursesEnter.setBounds(20, 120, 150, 40);
+
+		JLabel removeLabel = new JLabel("Enter course's name:");
+		removeLabel.setLayout(null);
+		removeLabel.setFont(font);
+		removeLabel.setHorizontalAlignment(JLabel.CENTER);
+		removeLabel.setVerticalAlignment(JLabel.TOP);
+		removeLabel.add(buttonRemoveCursesEnter);
+		removeLabel.add(firstNameTextField);
+		return removeLabel;
 	}
 
 	public JButton getButtonForMenu(String text) {
@@ -161,8 +178,16 @@ public class View {
 		return buttonRemoveCurses;
 	}
 
+	public JButton getRemoveEnterButton() {
+		return buttonRemoveCursesEnter;
+	}
+
 	public JTextField getIdTextField() {
 		return idTextField;
+	}
+
+	public JTextField getfirstNameTextField() {
+		return firstNameTextField;
 	}
 
 	public void resetIdTextField() {

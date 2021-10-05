@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import Model.Course;
 import Model.Student;
 import Model.StudentMangement;
 import View.View;
@@ -27,6 +28,16 @@ public class Controller {
         return student;
     }
 
+    public boolean removeCourse(Student student) {
+        String name = view.getfirstNameTextField().getText();
+        Course course = student.searchCourseByName(name);
+        if (course == null) {
+            return false;
+        }
+        return studentMangementSystem.removeCourseForStudent(student, course);
+
+    }
+
     public JPanel getJPanelStundetInfo(Student student) {
         return view.getPanelInfo(student);
     }
@@ -37,6 +48,10 @@ public class Controller {
 
     public JLabel getLabelForMenu() {
         return view.getJLabelForMenu();
+    }
+
+    public JLabel getJLabelRemoveCourse() {
+        return view.getLabelRemoveCourse();
     }
 
     public JLabel getLabelForSearch() {
@@ -70,4 +85,9 @@ public class Controller {
     public JButton getRemoveCursesButton() {
         return view.getRemoveButton();
     }
+
+    public JButton getRemoveCursesEnterButton() {
+        return view.getRemoveEnterButton();
+    }
+
 }
