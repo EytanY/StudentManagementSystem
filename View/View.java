@@ -35,6 +35,9 @@ public class View {
 	private JTextField emailTextField = new JTextField();
 	private JTextField fatherNameTextField = new JTextField();
 	private JTextField motherNameTextField = new JTextField();
+	private JTextField yearTextField = new JTextField();
+	private JTextField monthTextField = new JTextField();
+	private JTextField dayTextField = new JTextField();
 	// Radio Buttons
 	private JRadioButton maleRB = new JRadioButton("Male");;
 	private JRadioButton femaleRB = new JRadioButton("Female");;
@@ -177,7 +180,7 @@ public class View {
 		JLabel lastNamelabel = new JLabel("Last name:" + student.getLastName());
 		JLabel sexlabel = new JLabel("Sex:" + student.getSex());
 		JLabel idlabel = new JLabel("ID:" + student.getId());
-		JLabel birthDatelabel = new JLabel("Birth date:" + student.getBirthDate());
+		JLabel birthDatelabel = new JLabel("Age:" + student.getAge());
 		JLabel fatherNamelabel = new JLabel("Father's name:" + student.getFatherName());
 		JLabel motherNamelabel = new JLabel("mother's name:" + student.getMotherName());
 		JLabel emaillabel = new JLabel("Email:" + student.getEmail());
@@ -227,13 +230,19 @@ public class View {
 		JLabel motherNamelabel = new JLabel("mother's name:");
 		JLabel emaillabel = new JLabel("Email:");
 
-		JLabel[] arrLabel = { firstNamelabel, lastNamelabel, idlabel, motherNamelabel, fatherNamelabel, emaillabel,
+		JLabel[] arrLabel = { firstNamelabel, lastNamelabel, idlabel, fatherNamelabel, motherNamelabel, emaillabel,
 				sexlabel, birthDatelabel };
 		for (int index = 0; index < 8; index++) {
 			arrLabel[index].setBounds(50, 130 + index * 30, 150, 50);
 			arrLabel[index].setFont(font);
 			panel.add(arrLabel[index]);
 		}
+		firstNameTextField.setText("");
+		lastNameTextField.setText("");
+		idAddTextField.setText("");
+		fatherNameTextField.setText("");
+		motherNameTextField.setText("");
+		emailTextField.setText("");
 
 		firstNameTextField.setBounds(170, 150, 100, 20);
 		lastNameTextField.setBounds(170, 180, 100, 20);
@@ -267,11 +276,39 @@ public class View {
 			maleRB.setSelected(false);
 			setGender(Sex.Female);
 		});
+
+		// Date Data
+		JLabel yaerlabel = new JLabel("Year:");
+		JLabel monthlabel = new JLabel("Month(number):");
+		JLabel daylabel = new JLabel("Day:");
+		Font fontDate = new Font("Monospaced", Font.BOLD, 13);
+
+		yaerlabel.setBounds(50, 370, 50, 30);
+		yaerlabel.setFont(fontDate);
+		yearTextField.setBounds(90, 380, 40, 15);
+		yearTextField.setText("");
+		panel.add(yaerlabel);
+		panel.add(yearTextField);
+
+		monthlabel.setBounds(150, 370, 130, 30);
+		monthlabel.setFont(fontDate);
+		monthTextField.setBounds(260, 380, 30, 15);
+		monthTextField.setText("");
+		panel.add(monthlabel);
+		panel.add(monthTextField);
+
+		daylabel.setBounds(310, 370, 50, 30);
+		daylabel.setFont(fontDate);
+		dayTextField.setBounds(340, 380, 30, 15);
+		dayTextField.setText("");
+		panel.add(daylabel);
+		panel.add(dayTextField);
+
 		// Button (Menu & Add Student Enet)
-		buttonAddStudentEnter.setBounds(260, 400, 150, 30);
+		buttonAddStudentEnter.setBounds(260, 450, 150, 30);
 		panel.add(buttonAddStudentEnter);
 
-		buttonMenu.setBounds(50, 400, 150, 30);
+		buttonMenu.setBounds(50, 450, 150, 30);
 		panel.add(buttonMenu);
 
 		panel.setBackground(backgroundColoer);
@@ -352,6 +389,18 @@ public class View {
 
 	public JTextField getMotherNameTextField() {
 		return motherNameTextField;
+	}
+
+	public JTextField getYearTextField() {
+		return yearTextField;
+	}
+
+	public JTextField getMonthTextField() {
+		return monthTextField;
+	}
+
+	public JTextField getDayTextField() {
+		return dayTextField;
 	}
 
 	public JTextField getFatherNameTextField() {

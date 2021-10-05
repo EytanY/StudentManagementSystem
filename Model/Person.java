@@ -21,14 +21,14 @@ public abstract class Person {
         this.fatherName = fatherName;
         this.motherName = motherName;
         this.sex = sex;
-        // age = calcAge();
+        age = calcAge();
     }
 
     public int calcAge() {
         LocalDate currentDate = LocalDate.now();
-        currentDate.minusDays(birthDate.getDayOfMonth());
-        currentDate.minusMonths(birthDate.getMonthValue());
-        currentDate.minusYears(birthDate.getYear());
+        currentDate = currentDate.minusDays(birthDate.getDayOfMonth());
+        currentDate = currentDate.minusMonths(birthDate.getMonthValue());
+        currentDate = currentDate.minusYears(birthDate.getYear());
         return currentDate.getYear();
     }
 

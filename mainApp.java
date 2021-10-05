@@ -1,6 +1,9 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import Controller.Controller;
 import Model.Course;
 import Model.Student;
@@ -36,7 +39,7 @@ public class mainApp {
         Course c15 = new Course("Te21", 95);
         Course c16 = new Course("Te2122", 95);
         Course c17 = new Course("Te212222", 95);
-        Student student2 = new Student("Eytan", "Yeg", "316443878", null, "null", "null", Sex.Male,
+        Student student2 = new Student("Eytan", "Yeg", "316443878", LocalDate.of(1997, 3, 17), "null", "null", Sex.Male,
                 "etan173@gmail.com");
 
         studentMangement.addStudent(student2);
@@ -122,7 +125,7 @@ public class mainApp {
         controller.getAddCursesEnterButton().addActionListener(addCourseEnter -> {
             try {
                 if (controller.addCourse(student))
-                    JOptionPane.showMessageDialog(null, "Sucsses");
+                    JOptionPane.showMessageDialog(null, "Success");
                 else
                     JOptionPane.showMessageDialog(null, "Course already exsit");
             } catch (Exception e) {
@@ -146,7 +149,7 @@ public class mainApp {
         // Remove Course - Enter
         controller.getRemoveCursesEnterButton().addActionListener(removeCouresEnter -> {
             if (controller.removeCourse(student))
-                JOptionPane.showMessageDialog(null, "Sucsses");
+                JOptionPane.showMessageDialog(null, "Success");
             else
                 JOptionPane.showMessageDialog(null, "Course not exsit");
             inftoStundetFrame = new JFrame();
@@ -156,7 +159,7 @@ public class mainApp {
 
         });
 
-        // Add Student
+        // Add Student - Page
         controller.getAddStudentButton().addActionListener(e -> {
             addStudentFrame = new JFrame();
             newFrame(addStudentFrame, true);
@@ -165,6 +168,25 @@ public class mainApp {
 
         });
 
+        // Add Student - Enter
+        controller.getAddStudentEnterButton().addActionListener(addStudentEnter -> {
+            try {
+                if (controller.addStudent())
+                    JOptionPane.showMessageDialog(null, "Success");
+                else
+                    JOptionPane.showMessageDialog(null, "Student's id already exsit");
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(null, "Enter integer number please");
+            } catch (DateTimeException exception) {
+                JOptionPane.showMessageDialog(null, "Invalid birth date");
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, exception.getMessage());
+            } finally {
+                frame.setVisible(true);
+                addStudentFrame.dispose();
+            }
+
+        });
         controller.getExitButton().addActionListener(exit -> {
             // Save
 

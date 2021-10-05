@@ -1,13 +1,14 @@
 package Controller;
 
+import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import Model.Course;
 import Model.Student;
 import Model.StudentMangement;
+import Model.Person.Sex;
 import View.View;
 
 public class Controller {
@@ -46,6 +47,39 @@ public class Controller {
         Course course = new Course(name, finalGrade);
 
         return student.addCourse(course);
+    }
+
+    public boolean addStudent() throws Exception {
+        String firstName = view.getfirstNameTextField().getText();
+        String lastName = view.getLastNameTextField().getText();
+        String id = view.getIdAddTextField().getText();
+
+        if (id.length() != 9 || id.length() == 0)
+            throw new Exception("Invalid id");
+        Integer.parseInt(id);
+
+        String fatherName = view.getFatherNameTextField().getText();
+        String motherName = view.getMotherNameTextField().getText();
+        if (firstName.length() < 2 || lastName.length() < 2 || motherName.length() < 2 || fatherName.length() < 2)
+            throw new Exception("Invalid name");
+
+        String email = view.getEmailTextField().getText();
+        if (!(isEmail(email)))
+            throw new Exception("Invalid email");
+
+        Sex sexStudent = view.getGender();
+        int year = Integer.parseInt(view.getYearTextField().getText());
+        int month = Integer.parseInt(view.getMonthTextField().getText());
+        int day = Integer.parseInt(view.getDayTextField().getText());
+        LocalDate birthDate = LocalDate.of(year, month, day);
+        // For valid of Date
+        Student student = new Student(firstName, lastName, id, birthDate, fatherName, motherName, sexStudent, email);
+        if (student.getAge() < 16 && student.getAge() > 0)
+            throw new Exception("The student is too young(under 16)");
+        if (student.getAge() < 0 || student.getAge() > 120)
+            throw new Exception("Invalid birth date");
+        return studentMangementSystem
+                .addStudent(new Student(firstName, lastName, id, birthDate, fatherName, motherName, sexStudent, email));
     }
 
     public JPanel getJPanelStundetInfo(Student student) {
@@ -116,6 +150,12 @@ public class Controller {
         return view.getExitButton();
     }
 
-    public void getEnterButton(Object object) {
+    public JButton getAddStudentEnterButton() {
+        return view.getAddStudentEnterButton();
     }
+
+    public boolean isEmail(String s) {
+        return s.matches("^[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\\.[a-zA-Z]{2,4}");
+    }
+
 }
