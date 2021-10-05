@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import Model.Course;
 import Model.Student;
+import Model.Person.Sex;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -33,6 +35,11 @@ public class View {
 	private JTextField emailTextField = new JTextField();
 	private JTextField fatherNameTextField = new JTextField();
 	private JTextField motherNameTextField = new JTextField();
+	// Radio Buttons
+	private JRadioButton maleRB = new JRadioButton("Male");;
+	private JRadioButton femaleRB = new JRadioButton("Female");;
+	// Gender
+	private Sex sexStudent;
 
 	// Menu
 	public JLabel getJLabelForMenu() {
@@ -241,7 +248,26 @@ public class View {
 		panel.add(fatherNameTextField);
 		panel.add(motherNameTextField);
 		panel.add(emailTextField);
+		// Radio Button
+		maleRB.setBounds(130, 330, 100, 20);
+		maleRB.setFont(font);
+		maleRB.setFocusPainted(false);
+		panel.add(maleRB);
+		maleRB.setSelected(true);
+		maleRB.addActionListener(male -> {
+			femaleRB.setSelected(false);
+			setGender(Sex.Male);
+		});
 
+		femaleRB.setBounds(250, 330, 100, 20);
+		femaleRB.setFont(font);
+		femaleRB.setFocusPainted(false);
+		panel.add(femaleRB);
+		femaleRB.addActionListener(female -> {
+			maleRB.setSelected(false);
+			setGender(Sex.Female);
+		});
+		// Button (Menu & Add Student Enet)
 		buttonAddStudentEnter.setBounds(260, 400, 150, 30);
 		panel.add(buttonAddStudentEnter);
 
@@ -330,6 +356,22 @@ public class View {
 
 	public JTextField getFatherNameTextField() {
 		return fatherNameTextField;
+	}
+
+	public JRadioButton getMaleRB() {
+		return maleRB;
+	}
+
+	public JRadioButton getFemaleRB() {
+		return femaleRB;
+	}
+
+	public Sex getGender() {
+		return sexStudent;
+	}
+
+	public void setGender(Sex sexStudent) {
+		this.sexStudent = sexStudent;
 	}
 
 }
