@@ -29,13 +29,23 @@ public class Controller {
     }
 
     public boolean removeCourse(Student student) {
-        String name = view.getfirstNameTextField().getText();
+        String name = view.getCourseNameTextField().getText();
         Course course = student.searchCourseByName(name);
         if (course == null) {
             return false;
         }
         return studentMangementSystem.removeCourseForStudent(student, course);
 
+    }
+
+    public boolean addCourse(Student student) throws Exception {
+        String name = view.getCourseNameTextField().getText();
+        double finalGrade = Double.parseDouble(view.getGradeCourseTextField().getText());
+        if (finalGrade > 100 || finalGrade < 0 || name.length() == 0)
+            throw new Exception();
+        Course course = new Course(name, finalGrade);
+
+        return student.addCourse(course);
     }
 
     public JPanel getJPanelStundetInfo(Student student) {
@@ -56,6 +66,10 @@ public class Controller {
 
     public JLabel getLabelForSearch() {
         return view.getLabelForSearchStudent();
+    }
+
+    public JLabel getLabelAddCourse() {
+        return view.getLabelAddCourse();
     }
 
     public JButton getSearchStudentButton() {
@@ -88,6 +102,10 @@ public class Controller {
 
     public JButton getRemoveCursesEnterButton() {
         return view.getRemoveEnterButton();
+    }
+
+    public JButton getAddCursesEnterButton() {
+        return view.getAddEnterButton();
     }
 
 }

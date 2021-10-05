@@ -12,14 +12,16 @@ public class View {
 	private JButton buttonAddStudent = getButtonForMenu("Add Student");
 	private JButton buttonEnter = getButtonForMenu("Search");
 	private JButton buttonMenu = getButtonForMenu("Menu");
-	private JButton buttonCurses = getButtonForMenu("Curses");
-	private JButton buttonAddCurses = getButtonForMenu("Add curse");
-	private JButton buttonRemoveCurses = getButtonForMenu("Remove curse");
+	private JButton buttonCurses = getButtonForMenu("Courses");
+	private JButton buttonAddCurses = getButtonForMenu("Add course");
+	private JButton buttonRemoveCurses = getButtonForMenu("Remove course");
 	private JButton buttonRemoveCursesEnter = getButtonForMenu("Remove curse");
+	private JButton buttonAddCursesEnter = getButtonForMenu("Add course");
 	private Color backgroundColoer = new Color(229, 230, 204);
 	private Font font = new Font("Monospaced", Font.BOLD, 18);
 	private JTextField idTextField = new JTextField();
-	private JTextField firstNameTextField = new JTextField();
+	private JTextField courseNameTextField = new JTextField();
+	private JTextField courseGradeTextField = new JTextField();
 
 	public JLabel getJLabelForMenu() {
 		LocalDate cuurentDate = LocalDate.now();
@@ -93,7 +95,7 @@ public class View {
 
 	public JLabel getLabelRemoveCourse() {
 
-		firstNameTextField.setBounds(20, 50, 100, 40);
+		courseNameTextField.setBounds(20, 50, 100, 30);
 		buttonRemoveCursesEnter.setBounds(20, 120, 150, 40);
 
 		JLabel removeLabel = new JLabel("Enter course's name:");
@@ -102,8 +104,27 @@ public class View {
 		removeLabel.setHorizontalAlignment(JLabel.CENTER);
 		removeLabel.setVerticalAlignment(JLabel.TOP);
 		removeLabel.add(buttonRemoveCursesEnter);
-		removeLabel.add(firstNameTextField);
+		removeLabel.add(courseNameTextField); // name of courese
 		return removeLabel;
+	}
+
+	public JLabel getLabelAddCourse() {
+
+		courseNameTextField.setBounds(20, 50, 100, 30);
+		courseGradeTextField.setBounds(150, 50, 50, 30);
+		buttonAddCursesEnter.setBounds(20, 120, 150, 40);
+		courseNameTextField.setText("Course's name");
+		courseGradeTextField.setText("Grade");
+
+		JLabel addLabel = new JLabel("Enter course's name and then grade:");
+		addLabel.setLayout(null);
+		addLabel.setFont(font);
+		addLabel.setHorizontalAlignment(JLabel.CENTER);
+		addLabel.setVerticalAlignment(JLabel.TOP);
+		addLabel.add(buttonAddCursesEnter);
+		addLabel.add(courseNameTextField); // name of courese
+		addLabel.add(courseGradeTextField); // grade of course
+		return addLabel;
 	}
 
 	public JButton getButtonForMenu(String text) {
@@ -133,7 +154,7 @@ public class View {
 		JLabel fatherNamelabel = new JLabel("Father's name:" + student.getFatherName());
 		JLabel motherNamelabel = new JLabel("mother's name:" + student.getMotherName());
 		JLabel emaillabel = new JLabel("Email:" + student.getEmail());
-		JLabel avaregelabel = new JLabel("Avarege:" + student.getAverage());
+		JLabel avaregelabel = new JLabel("Avarege:" + Math.round(student.getAverage()));
 		JLabel[] arrLabel = { firstNamelabel, lastNamelabel, sexlabel, idlabel, birthDatelabel, fatherNamelabel,
 				motherNamelabel, emaillabel, avaregelabel };
 		for (int index = 0; index < 9; index++) {
@@ -182,16 +203,24 @@ public class View {
 		return buttonRemoveCursesEnter;
 	}
 
+	public JButton getAddEnterButton() {
+		return buttonAddCursesEnter;
+	}
+
 	public JTextField getIdTextField() {
 		return idTextField;
 	}
 
-	public JTextField getfirstNameTextField() {
-		return firstNameTextField;
+	public JTextField getCourseNameTextField() {
+		return courseNameTextField;
 	}
 
 	public void resetIdTextField() {
 		idTextField.setText("");
+	}
+
+	public JTextField getGradeCourseTextField() {
+		return courseGradeTextField;
 	}
 
 }

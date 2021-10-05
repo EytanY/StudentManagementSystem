@@ -94,12 +94,23 @@ public class mainApp {
                         });
 
                         controller.getAddCursesButton().addActionListener(addCourse -> {
-                            // Add Curse
-                            try {
-
-                            } catch (Exception e) {
-                                // TODO: handle exception
-                            }
+                            cursesFrame.dispose();
+                            JFrame cursesAddFrame = new JFrame();
+                            newFrame(cursesAddFrame);
+                            cursesAddFrame.add(controller.getLabelAddCourse());
+                            controller.getAddCursesEnterButton().addActionListener(addCourseEnter -> {
+                                try {
+                                    if (controller.addCourse(student))
+                                        JOptionPane.showMessageDialog(null, "Sucsses");
+                                    else
+                                        JOptionPane.showMessageDialog(null, "Course already exsit");
+                                } catch (Exception exception) {
+                                    JOptionPane.showMessageDialog(null, "Invalid Input");
+                                } finally {
+                                    cursesAddFrame.dispose();
+                                    frame.setVisible(true);
+                                }
+                            });
                         });
 
                         controller.getRemoveCursesButton().addActionListener(removeCourse -> {
