@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import Controller.Controller;
@@ -8,6 +9,12 @@ import Model.Person.Sex;
 import View.View;
 
 public class mainApp {
+    public static Student student;
+    public static JFrame coursesFrame;
+    public static JFrame inftoStundetFrame;
+    public static JFrame addCourseFrame;
+    public static JFrame removeCourseFrame;
+
     public static void main(String[] args) {
         View view = new View();
         StudentMangement studentMangement = new StudentMangement();
@@ -53,92 +60,96 @@ public class mainApp {
         Controller controller = new Controller(view, studentMangement);
 
         JLabel labelForSearch = controller.getLabelForSearch();
+        JFrame frameSearch = new JFrame();
+        newFrame(frameSearch, false);
+        frameSearch.setVisible(false);
+        frameSearch.add(labelForSearch);
         JFrame frame = new JFrame();
         JLabel labelForMenu = controller.getLabelForMenu();
 
-        // Search Student button
+        // Return - Menu
+        controller.getMenuButton().addActionListener(menu -> {
+            frameSearch.setVisible(false);
+            inftoStundetFrame.dispose();
+            if (coursesFrame != null)
+                coursesFrame.dispose();
+            frame.setVisible(true);
+            // return menu
+        });
+
+        // Search Student - Page
         controller.getSearchStudentButton().addActionListener(menuSearch -> {
             frame.setVisible(false);
-            JFrame searchFrame = new JFrame();
-            newFrame(searchFrame);
-            searchFrame.add(labelForSearch);
-            // Enter - Search the student
-            controller.getEnterButton().addActionListener(search -> {
-                try {
-                    // Student exsit in System
-                    Student student = controller.searchStudent();
-                    searchFrame.setVisible(false);
-                    ;
-                    JFrame studentFrame = new JFrame();
-                    newFrame(studentFrame);
-                    studentFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+            frameSearch.setVisible(true);
+        });
 
-                    // Return Menu
-                    controller.getMenuButton().addActionListener(menu -> {
-                        studentFrame.dispose();
-                        frame.setVisible(true);
-                    });
-                    // Show the courses of student
-                    controller.getCursesButton().addActionListener(cursesButto -> {
-                        studentFrame.dispose();
-                        JFrame cursesFrame = new JFrame();
-                        newFrame(cursesFrame);
-                        cursesFrame.add(controller.getPanelCurses(student));
-                        // Return to Menu
-                        controller.getMenuButton().addActionListener(menu -> {
-                            cursesFrame.dispose();
-                            frame.setVisible(true);
-                        });
+        // Information about student
+        controller.getEnterButton().addActionListener(searchEnter -> {
+            try {
+                student = controller.searchStudent();
+                inftoStundetFrame = new JFrame();
+                newFrame(inftoStundetFrame, true);
+                inftoStundetFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+                frameSearch.setVisible(false);
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Invalid Input");
+                frameSearch.setVisible(false);
+                frame.setVisible(true);
+            }
+        });
 
-                        controller.getAddCursesButton().addActionListener(addCourse -> {
-                            cursesFrame.dispose();
-                            JFrame cursesAddFrame = new JFrame();
-                            newFrame(cursesAddFrame);
-                            cursesAddFrame.add(controller.getLabelAddCourse());
-                            controller.getAddCursesEnterButton().addActionListener(addCourseEnter -> {
-                                try {
-                                    if (controller.addCourse(student))
-                                        JOptionPane.showMessageDialog(null, "Sucsses");
-                                    else
-                                        JOptionPane.showMessageDialog(null, "Course already exsit");
-                                } catch (Exception exception) {
-                                    JOptionPane.showMessageDialog(null, "Invalid Input");
-                                } finally {
-                                    cursesAddFrame.dispose();
-                                    frame.setVisible(true);
-                                }
-                            });
-                        });
+        controller.getCursesButton().addActionListener(coursesStudent -> {
+            inftoStundetFrame.setVisible(false);
+            coursesFrame = new JFrame();
+            newFrame(coursesFrame, true);
+            coursesFrame.add(controller.getPanelCurses(student));
+            // show courses
 
-                        controller.getRemoveCursesButton().addActionListener(removeCourse -> {
-                            // Remove course
-                            cursesFrame.dispose();
-                            JFrame cursesRemoveFrame = new JFrame();
-                            newFrame(cursesRemoveFrame);
-                            cursesRemoveFrame.add(controller.getJLabelRemoveCourse());
+        });
+        // Add Course - Page
+        controller.getAddCursesButton().addActionListener(addCourse -> {
+            addCourseFrame = new JFrame();
+            newFrame(addCourseFrame, true);
+            addCourseFrame.add(controller.getLabelAddCourse());
+            coursesFrame.dispose();
+        });
 
-                            // Remove curse enter
-                            controller.getRemoveCursesEnterButton().addActionListener(removeCourseEnter -> {
-                                if (controller.removeCourse(student))
-                                    JOptionPane.showMessageDialog(null, "Sucsses");
-                                else
-                                    JOptionPane.showMessageDialog(null, "Course not exsit");
-                                cursesRemoveFrame.dispose();
-                                frame.setVisible(true);
-                            });
-                        });
-                    });
-                } catch (Exception exception) {
-                    JOptionPane.showMessageDialog(null, "Invalid Input");
-                    searchFrame.dispose();
-                    frame.setVisible(true);
+        // Add Course - Enter
+        controller.getAddCursesEnterButton().addActionListener(addCourseEnter -> {
+            try {
+                if (controller.addCourse(student))
+                    JOptionPane.showMessageDialog(null, "Sucsses");
+                else
+                    JOptionPane.showMessageDialog(null, "Course already exsit");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Invalid Grade");
+            } finally {
+                inftoStundetFrame = new JFrame();
+                newFrame(inftoStundetFrame, true);
+                inftoStundetFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+                addCourseFrame.dispose();
+            }
 
-                }
-            });
+        });
+        // Remove Course - Page
+        controller.getRemoveCursesButton().addActionListener(removeCourse -> {
+            removeCourseFrame = new JFrame();
+            newFrame(removeCourseFrame, true);
+            removeCourseFrame.add(controller.getJLabelRemoveCourse());
+            coursesFrame.dispose();
+        });
 
-            controller.getEnterButton().addActionListener(search -> {
-                // Do For search
-            });
+        // Remove Course - Enter
+        controller.getRemoveCursesEnterButton().addActionListener(removeCouresEnter -> {
+            if (controller.removeCourse(student))
+                JOptionPane.showMessageDialog(null, "Sucsses");
+            else
+                JOptionPane.showMessageDialog(null, "Course not exsit");
+            inftoStundetFrame = new JFrame();
+            newFrame(inftoStundetFrame, true);
+            inftoStundetFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+            removeCourseFrame.dispose();
+
         });
 
         controller.getAddStudentButton().addActionListener(e -> {
@@ -152,11 +163,11 @@ public class mainApp {
             frame.dispose();
         });
         frame.add(labelForMenu);
-        newFrame(frame);
+        newFrame(frame, true);
     }
 
-    public static void newFrame(JFrame frame) {
-        frame.setVisible(true);
+    public static void newFrame(JFrame frame, boolean bool) {
+        frame.setVisible(bool);
         frame.setSize(450, 550);
         frame.setResizable(false);
         frame.setTitle("Student Mangement System");
@@ -164,4 +175,5 @@ public class mainApp {
         frame.setLocation(400, 70);
         frame.getContentPane().setBackground(new Color(229, 230, 204));
     }
+
 }

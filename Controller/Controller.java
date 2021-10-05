@@ -111,4 +111,7 @@ public class Controller {
     public JButton getExitButton() {
         return view.getExitButton();
     }
+
+    public void getEnterButton(Object object) {
+    }
 }
