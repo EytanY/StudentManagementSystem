@@ -52,6 +52,10 @@ public class Controller {
         return view.getPanelInfo(student);
     }
 
+    public JPanel getJPanelAddStundet() {
+        return view.getPanelAddStundet();
+    }
+
     public JScrollPane getPanelCurses(Student student) {
         return view.getPanelOfCurses(student);
     }

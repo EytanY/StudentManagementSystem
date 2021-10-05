@@ -14,6 +14,7 @@ public class mainApp {
     public static JFrame inftoStundetFrame;
     public static JFrame addCourseFrame;
     public static JFrame removeCourseFrame;
+    public static JFrame addStudentFrame;
 
     public static void main(String[] args) {
         View view = new View();
@@ -154,6 +155,11 @@ public class mainApp {
 
         controller.getAddStudentButton().addActionListener(e -> {
             // Add Student
+            addStudentFrame = new JFrame();
+            newFrame(addStudentFrame, true);
+            addStudentFrame.add(controller.getJPanelAddStundet());
+            frame.setVisible(false);
+
         });
 
         controller.getExitButton().addActionListener(exit -> {

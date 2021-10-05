@@ -8,6 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class View {
+	// Style
+	private Color backgroundColoer = new Color(229, 230, 204);
+	private Font font = new Font("Monospaced", Font.BOLD, 18);
+	// Buttons
 	private JButton buttonSearchStudent = getButtonForMenu("Search Student");
 	private JButton buttonAddStudent = getButtonForMenu("Add Student");
 	private JButton buttonExit = getButtonForMenu("Exit & Save");
@@ -18,12 +22,12 @@ public class View {
 	private JButton buttonRemoveCurses = getButtonForMenu("Remove course");
 	private JButton buttonRemoveCursesEnter = getButtonForMenu("Remove curse");
 	private JButton buttonAddCursesEnter = getButtonForMenu("Add course");
-	private Color backgroundColoer = new Color(229, 230, 204);
-	private Font font = new Font("Monospaced", Font.BOLD, 18);
+	// Text Fileds
 	private JTextField idTextField = new JTextField();
 	private JTextField courseNameTextField = new JTextField();
 	private JTextField courseGradeTextField = new JTextField();
 
+	// Menu
 	public JLabel getJLabelForMenu() {
 		LocalDate cuurentDate = LocalDate.now();
 		JLabel label = new JLabel();
@@ -47,6 +51,7 @@ public class View {
 		return label;
 	}
 
+	// Search Studnet
 	public JLabel getLabelForSearchStudent() {
 		JLabel label = new JLabel();
 		label.setText("Enter Student's Id:");
@@ -71,6 +76,7 @@ public class View {
 		return label;
 	}
 
+	// Course Of Stundet
 	public JScrollPane getPanelOfCurses(Student student) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(25, 40));
@@ -96,6 +102,7 @@ public class View {
 		return sp;
 	}
 
+	// Remove Course
 	public JLabel getLabelRemoveCourse() {
 
 		courseNameTextField.setBounds(20, 50, 100, 30);
@@ -111,6 +118,7 @@ public class View {
 		return removeLabel;
 	}
 
+	// Add Course
 	public JLabel getLabelAddCourse() {
 
 		courseNameTextField.setBounds(20, 50, 100, 30);
@@ -130,6 +138,7 @@ public class View {
 		return addLabel;
 	}
 
+	// Style of Buttons
 	public JButton getButtonForMenu(String text) {
 		JButton button = new JButton();
 		button.setText(text);
@@ -139,6 +148,7 @@ public class View {
 		return button;
 	}
 
+	// Information Of Stundet
 	public JPanel getPanelInfo(Student student) {
 		JPanel panel = new JPanel();
 		panel.setBounds(100, 100, 400, 400);
@@ -170,6 +180,21 @@ public class View {
 		buttonCurses.setBounds(200, 430, 100, 40);
 		panel.add(buttonMenu);
 		panel.add(buttonCurses);
+		panel.setBackground(backgroundColoer);
+		return panel;
+	}
+
+	// Add Student
+	public JPanel getPanelAddStundet() {
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+
+		// Title Add Student
+		JLabel infoStundetlabel = new JLabel("Add Student:");
+		infoStundetlabel.setFont(font);
+		infoStundetlabel.setBounds(50, 10, 300, 50);
+		panel.add(infoStundetlabel);
+
 		panel.setBackground(backgroundColoer);
 		return panel;
 	}
