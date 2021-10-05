@@ -40,7 +40,8 @@ public class mainApp {
         Course c16 = new Course("Te2122", 95);
         Course c17 = new Course("Te212222", 95);
         Student student2 = new Student("Eytan", "Yeg", "316443878", LocalDate.of(1997, 3, 17), "null", "null", Sex.Male,
-                "etan173@gmail.com");
+                "etan173@gmail.com", new ImageIcon(
+                        "C:\\Users\\etan1\\OneDrive\\מסמכים\\GitHub\\StudentMangement\\StudentManagement\\Photos\\eytanYegudayev.jpg"));
 
         studentMangement.addStudent(student2);
 
@@ -187,6 +188,7 @@ public class mainApp {
             }
 
         });
+
         controller.getExitButton().addActionListener(exit -> {
             // Save
 

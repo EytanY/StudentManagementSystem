@@ -2,10 +2,10 @@ package View;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import Model.Course;
 import Model.Student;
 import Model.Person.Sex;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -24,7 +24,8 @@ public class View {
 	private JButton buttonRemoveCurses = getButtonForMenu("Remove course");
 	private JButton buttonRemoveCursesEnter = getButtonForMenu("Remove curse");
 	private JButton buttonAddCursesEnter = getButtonForMenu("Add course");
-	private JButton buttonAddStudentEnter = getButtonForMenu("Add Student");
+	private JButton buttonAddStudentEnter = getButtonForMenu("Add student");
+	private JButton buttonAddImage = getButtonForMenu("Add photo");
 	// Text Fileds
 	private JTextField idTextField = new JTextField();
 	private JTextField idAddTextField = new JTextField();
@@ -43,6 +44,7 @@ public class View {
 	private JRadioButton femaleRB = new JRadioButton("Female");;
 	// Gender
 	private Sex sexStudent;
+	private ImageIcon photo;
 
 	// Menu
 	public JLabel getJLabelForMenu() {
@@ -173,8 +175,14 @@ public class View {
 
 		JLabel infoStundetlabel = new JLabel("Information:");
 		infoStundetlabel.setFont(font);
-		infoStundetlabel.setBounds(50, 20, 300, 50);
+		infoStundetlabel.setBounds(50, 0, 300, 50);
 		panel.add(infoStundetlabel);
+
+		ImageIcon photo = student.getPhoto();
+		JLabel photolabel = new JLabel();
+		photolabel.setBounds(50, 50, 100, 100);
+		photolabel.setIcon(photo);
+		panel.add(photolabel);
 
 		JLabel firstNamelabel = new JLabel("First name:" + student.getFirstName());
 		JLabel lastNamelabel = new JLabel("Last name:" + student.getLastName());
@@ -188,7 +196,7 @@ public class View {
 		JLabel[] arrLabel = { firstNamelabel, lastNamelabel, sexlabel, idlabel, birthDatelabel, fatherNamelabel,
 				motherNamelabel, emaillabel, avaregelabel };
 		for (int index = 0; index < 9; index++) {
-			arrLabel[index].setBounds(50, 100 + index * 30, 300, 50);
+			arrLabel[index].setBounds(50, 150 + index * 30, 300, 50);
 			arrLabel[index].setFont(font);
 			panel.add(arrLabel[index]);
 		}
@@ -303,8 +311,21 @@ public class View {
 		dayTextField.setText("");
 		panel.add(daylabel);
 		panel.add(dayTextField);
+		// Add Photo
+		buttonAddImage.addActionListener(addImage -> {
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setAcceptAllFileFilterUsed(false);
+			fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png"));
+			int res = fileChooser.showOpenDialog(null); // select file to open
+			if (res == JFileChooser.APPROVE_OPTION) {
+				photo = new ImageIcon(fileChooser.getSelectedFile().getAbsolutePath());
+			}
+		});
 
 		// Button (Menu & Add Student Enet)
+		buttonAddImage.setBounds(50, 410, 150, 30);
+		panel.add(buttonAddImage);
+
 		buttonAddStudentEnter.setBounds(260, 450, 150, 30);
 		panel.add(buttonAddStudentEnter);
 
@@ -357,6 +378,10 @@ public class View {
 
 	public JButton getAddStudentEnterButton() {
 		return buttonAddStudentEnter;
+	}
+
+	public JButton getAddImageButton() {
+		return buttonAddImage;
 	}
 
 	public JTextField getIdTextField() {
@@ -421,6 +446,14 @@ public class View {
 
 	public void setGender(Sex sexStudent) {
 		this.sexStudent = sexStudent;
+	}
+
+	public ImageIcon getPhotoStudent() {
+		return photo;
+	}
+
+	public void resetPhotoStundet() {
+		photo = null;
 	}
 
 }

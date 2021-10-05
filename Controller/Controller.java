@@ -1,13 +1,9 @@
 package Controller;
 
 import java.time.LocalDate;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import Model.Course;
-import Model.Student;
-import Model.StudentMangement;
+import java.awt.Image;
+import javax.swing.*;
+import Model.*;
 import Model.Person.Sex;
 import View.View;
 
@@ -72,14 +68,25 @@ public class Controller {
         int month = Integer.parseInt(view.getMonthTextField().getText());
         int day = Integer.parseInt(view.getDayTextField().getText());
         LocalDate birthDate = LocalDate.of(year, month, day);
+        ImageIcon photo = view.getPhotoStudent();
+        if (photo == null)
+            throw new Exception("Must upload photo");
+        view.resetPhotoStundet();
+        photo = resizeImage(photo);
         // For valid of Date
-        Student student = new Student(firstName, lastName, id, birthDate, fatherName, motherName, sexStudent, email);
+        Student student = new Student(firstName, lastName, id, birthDate, fatherName, motherName, sexStudent, email,
+                photo);
         if (student.getAge() < 16 && student.getAge() > 0)
             throw new Exception("The student is too young(under 16)");
         if (student.getAge() < 0 || student.getAge() > 120)
             throw new Exception("Invalid birth date");
-        return studentMangementSystem
-                .addStudent(new Student(firstName, lastName, id, birthDate, fatherName, motherName, sexStudent, email));
+        return studentMangementSystem.addStudent(student);
+    }
+
+    public ImageIcon resizeImage(ImageIcon img) {
+        Image imgImage = img.getImage();
+        Image newImgImage = imgImage.getScaledInstance(80, 110, java.awt.Image.SCALE_DEFAULT);
+        return new ImageIcon(newImgImage);
     }
 
     public JPanel getJPanelStundetInfo(Student student) {
@@ -152,6 +159,10 @@ public class Controller {
 
     public JButton getAddStudentEnterButton() {
         return view.getAddStudentEnterButton();
+    }
+
+    public JButton getAddImageButton() {
+        return view.getAddImageButton();
     }
 
     public boolean isEmail(String s) {

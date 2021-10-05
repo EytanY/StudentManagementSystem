@@ -3,15 +3,19 @@ package Model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Student extends Person {
     private String email;
     private ArrayList<Course> courses;
     private double averageGrade;
+    private ImageIcon photo;
 
     public Student(String firstName, String lastName, String id, LocalDate birthDate, String fatherName,
-            String motherName, Sex sex, String email) {
+            String motherName, Sex sex, String email, ImageIcon photo) {
         super(firstName, lastName, id, birthDate, fatherName, motherName, sex);
         this.email = email;
+        this.photo = photo;
         courses = new ArrayList<Course>();
         averageGrade = 0;
     }
@@ -53,7 +57,11 @@ public class Student extends Person {
     }
 
     public boolean removeCourse(Course course) {
-        return courses.remove(course);
+        if (courses.remove(course)) {
+            clacAverage();
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<Course> getCourses() {
@@ -70,6 +78,10 @@ public class Student extends Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ImageIcon getPhoto() {
+        return photo;
     }
 
 }
