@@ -71,9 +71,12 @@ public class mainApp {
         // Return - Menu
         controller.getMenuButton().addActionListener(menu -> {
             frameSearch.setVisible(false);
-            inftoStundetFrame.dispose();
+            if (inftoStundetFrame != null)
+                inftoStundetFrame.dispose();
             if (coursesFrame != null)
                 coursesFrame.dispose();
+            if (addStudentFrame != null)
+                addStudentFrame.dispose();
             frame.setVisible(true);
             // return menu
         });
@@ -153,8 +156,8 @@ public class mainApp {
 
         });
 
+        // Add Student
         controller.getAddStudentButton().addActionListener(e -> {
-            // Add Student
             addStudentFrame = new JFrame();
             newFrame(addStudentFrame, true);
             addStudentFrame.add(controller.getJPanelAddStundet());

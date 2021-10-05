@@ -22,10 +22,17 @@ public class View {
 	private JButton buttonRemoveCurses = getButtonForMenu("Remove course");
 	private JButton buttonRemoveCursesEnter = getButtonForMenu("Remove curse");
 	private JButton buttonAddCursesEnter = getButtonForMenu("Add course");
+	private JButton buttonAddStudentEnter = getButtonForMenu("Add Student");
 	// Text Fileds
 	private JTextField idTextField = new JTextField();
+	private JTextField idAddTextField = new JTextField();
 	private JTextField courseNameTextField = new JTextField();
 	private JTextField courseGradeTextField = new JTextField();
+	private JTextField firstNameTextField = new JTextField();
+	private JTextField lastNameTextField = new JTextField();
+	private JTextField emailTextField = new JTextField();
+	private JTextField fatherNameTextField = new JTextField();
+	private JTextField motherNameTextField = new JTextField();
 
 	// Menu
 	public JLabel getJLabelForMenu() {
@@ -186,14 +193,60 @@ public class View {
 
 	// Add Student
 	public JPanel getPanelAddStundet() {
+		idTextField.setText("");
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
 		// Title Add Student
 		JLabel infoStundetlabel = new JLabel("Add Student:");
 		infoStundetlabel.setFont(font);
-		infoStundetlabel.setBounds(50, 10, 300, 50);
+		infoStundetlabel.setBounds(50, 0, 300, 50);
 		panel.add(infoStundetlabel);
+		// Add Icon
+		ImageIcon image = new ImageIcon(
+				"C:\\Users\\etan1\\OneDrive\\מסמכים\\GitHub\\StudentMangement\\StudentManagement\\Photos\\add.png");
+		JLabel imagelabel = new JLabel();
+		imagelabel.setIcon(image);
+		imagelabel.setBounds(50, 40, 100, 100);
+		panel.add(imagelabel);
+
+		// Info Label
+		JLabel firstNamelabel = new JLabel("First name:");
+		JLabel lastNamelabel = new JLabel("Last name:");
+		JLabel sexlabel = new JLabel("Sex:");
+		JLabel idlabel = new JLabel("ID:");
+		JLabel birthDatelabel = new JLabel("Birth date:");
+		JLabel fatherNamelabel = new JLabel("Father's name:");
+		JLabel motherNamelabel = new JLabel("mother's name:");
+		JLabel emaillabel = new JLabel("Email:");
+
+		JLabel[] arrLabel = { firstNamelabel, lastNamelabel, idlabel, motherNamelabel, fatherNamelabel, emaillabel,
+				sexlabel, birthDatelabel };
+		for (int index = 0; index < 8; index++) {
+			arrLabel[index].setBounds(50, 130 + index * 30, 150, 50);
+			arrLabel[index].setFont(font);
+			panel.add(arrLabel[index]);
+		}
+
+		firstNameTextField.setBounds(170, 150, 100, 20);
+		lastNameTextField.setBounds(170, 180, 100, 20);
+		idAddTextField.setBounds(100, 210, 100, 20);
+		fatherNameTextField.setBounds(200, 240, 100, 20);
+		motherNameTextField.setBounds(200, 270, 100, 20);
+		emailTextField.setBounds(130, 300, 130, 20);
+
+		panel.add(firstNameTextField);
+		panel.add(lastNameTextField);
+		panel.add(idAddTextField);
+		panel.add(fatherNameTextField);
+		panel.add(motherNameTextField);
+		panel.add(emailTextField);
+
+		buttonAddStudentEnter.setBounds(260, 400, 150, 30);
+		panel.add(buttonAddStudentEnter);
+
+		buttonMenu.setBounds(50, 400, 150, 30);
+		panel.add(buttonMenu);
 
 		panel.setBackground(backgroundColoer);
 		return panel;
@@ -239,20 +292,44 @@ public class View {
 		return buttonExit;
 	}
 
+	public JButton getAddStudentEnterButton() {
+		return buttonAddStudentEnter;
+	}
+
 	public JTextField getIdTextField() {
 		return idTextField;
+	}
+
+	public JTextField getIdAddTextField() {
+		return idAddTextField;
 	}
 
 	public JTextField getCourseNameTextField() {
 		return courseNameTextField;
 	}
 
-	public void resetIdTextField() {
-		idTextField.setText("");
-	}
-
 	public JTextField getGradeCourseTextField() {
 		return courseGradeTextField;
+	}
+
+	public JTextField getfirstNameTextField() {
+		return firstNameTextField;
+	}
+
+	public JTextField getLastNameTextField() {
+		return lastNameTextField;
+	}
+
+	public JTextField getEmailTextField() {
+		return emailTextField;
+	}
+
+	public JTextField getMotherNameTextField() {
+		return motherNameTextField;
+	}
+
+	public JTextField getFatherNameTextField() {
+		return fatherNameTextField;
 	}
 
 }
