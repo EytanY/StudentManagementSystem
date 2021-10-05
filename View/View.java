@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class View {
 	private JButton buttonSearchStudent = getButtonForMenu("Search Student");
 	private JButton buttonAddStudent = getButtonForMenu("Add Student");
+	private JButton buttonExit = getButtonForMenu("Exit & Save");
 	private JButton buttonEnter = getButtonForMenu("Search");
 	private JButton buttonMenu = getButtonForMenu("Menu");
 	private JButton buttonCurses = getButtonForMenu("Courses");
@@ -39,8 +40,10 @@ public class View {
 
 		buttonSearchStudent.setBounds(130, 300, 170, 40);
 		buttonAddStudent.setBounds(130, 360, 170, 40);
-		label.add(this.buttonSearchStudent);
-		label.add(this.buttonAddStudent);
+		buttonExit.setBounds(130, 420, 170, 40);
+		label.add(buttonSearchStudent);
+		label.add(buttonAddStudent);
+		label.add(buttonExit);
 		return label;
 	}
 
@@ -205,6 +208,10 @@ public class View {
 
 	public JButton getAddEnterButton() {
 		return buttonAddCursesEnter;
+	}
+
+	public JButton getExitButton() {
+		return buttonExit;
 	}
 
 	public JTextField getIdTextField() {

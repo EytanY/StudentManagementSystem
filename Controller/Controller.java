@@ -108,4 +108,7 @@ public class Controller {
         return view.getAddEnterButton();
     }
 
+    public JButton getExitButton() {
+        return view.getExitButton();
+    }
 }
