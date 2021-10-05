@@ -1,14 +1,11 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import Controller.Controller;
 import Model.Course;
 import Model.Student;
 import Model.StudentMangement;
 import Model.Person.Sex;
 import View.View;
-import java.awt.Color;
 
 public class mainApp {
     public static void main(String[] args) {
@@ -149,9 +146,9 @@ public class mainApp {
         });
 
         controller.getExitButton().addActionListener(exit -> {
-            // Save 
-            
-            //Exit
+            // Save
+
+            // Exit
             frame.dispose();
         });
         frame.add(labelForMenu);
