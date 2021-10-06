@@ -14,24 +14,22 @@ public class mainApp {
     public static JFrame addCourseFrame;
     public static JFrame removeCourseFrame;
     public static JFrame addStudentFrame;
+    public static JFrame searchFrame;
 
     public static void main(String[] args) {
         View view = new View();
         StudentMangement studentMangement = new StudentMangement();
         Controller controller = new Controller(view, studentMangement);
-
+        // Upadate from file
         controller.updateData("Data.dat");
-        JLabel labelForSearch = controller.getLabelForSearch();
-        JFrame frameSearch = new JFrame();
-        newFrame(frameSearch, false);
-        frameSearch.setVisible(false);
-        frameSearch.add(labelForSearch);
+
         JFrame frame = new JFrame();
         JLabel labelForMenu = controller.getLabelForMenu();
 
         // Return - Menu
         controller.getMenuButton().addActionListener(menu -> {
-            frameSearch.setVisible(false);
+            if (searchFrame != null)
+                searchFrame.dispose();
             if (inftoStundetFrame != null)
                 inftoStundetFrame.dispose();
             if (coursesFrame != null)
@@ -44,8 +42,10 @@ public class mainApp {
 
         // Search Student - Page
         controller.getSearchStudentButton().addActionListener(menuSearch -> {
+            searchFrame = new JFrame();
+            newFrame(searchFrame, true);
+            searchFrame.add(controller.getLabelForSearch());
             frame.setVisible(false);
-            frameSearch.setVisible(true);
         });
 
         // Information about student
@@ -55,10 +55,10 @@ public class mainApp {
                 inftoStundetFrame = new JFrame();
                 newFrame(inftoStundetFrame, true);
                 inftoStundetFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
-                frameSearch.setVisible(false);
+                searchFrame.dispose();
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null, "Invalid Input");
-                frameSearch.setVisible(false);
+                searchFrame.dispose();
                 frame.setVisible(true);
             }
         });
