@@ -1,10 +1,10 @@
 
 import javax.swing.*;
-import java.awt.*;
 import java.time.DateTimeException;
 import Controller.Controller;
 import Model.Student;
 import Model.StudentMangement;
+import View.JFStudentManagement;
 import View.View;
 
 public class mainApp {
@@ -23,8 +23,7 @@ public class mainApp {
         // Upadate from file
         controller.updateData("Data.dat");
 
-        JFrame frame = new JFrame();
-        JLabel labelForMenu = controller.getLabelForMenu();
+        JFStudentManagement menuFrame = new JFStudentManagement(controller.getLabelForMenu());
 
         // Return - Menu
         controller.getMenuButton().addActionListener(menu -> {
@@ -36,46 +35,39 @@ public class mainApp {
                 coursesFrame.dispose();
             if (addStudentFrame != null)
                 addStudentFrame.dispose();
-            frame.setVisible(true);
+            menuFrame.setVisible(true);
             // return menu
         });
 
         // Search Student - Page
         controller.getSearchStudentButton().addActionListener(menuSearch -> {
-            searchFrame = new JFrame();
-            newFrame(searchFrame, true);
-            searchFrame.add(controller.getLabelForSearch());
-            frame.setVisible(false);
+            searchFrame = new JFStudentManagement(controller.getLabelForSearch());
+            menuFrame.setVisible(false);
         });
 
         // Information about student
         controller.getEnterButton().addActionListener(searchEnter -> {
             try {
                 student = controller.searchStudent();
-                inftoStundetFrame = new JFrame();
-                newFrame(inftoStundetFrame, true);
-                inftoStundetFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+                inftoStundetFrame = new JFStudentManagement(controller.getJPanelStundetInfo(student));
                 searchFrame.dispose();
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null, "Invalid Input");
                 searchFrame.dispose();
-                frame.setVisible(true);
+                menuFrame.setVisible(true);
             }
         });
 
+        // Show courses
         controller.getCursesButton().addActionListener(coursesStudent -> {
-            inftoStundetFrame.setVisible(false);
-            coursesFrame = new JFrame();
-            newFrame(coursesFrame, true);
-            coursesFrame.add(controller.getPanelCurses(student));
-            // show courses
-
+            inftoStundetFrame.dispose();
+            ;
+            coursesFrame = new JFStudentManagement(controller.getPanelCurses(student));
         });
+
         // Add Course - Page
         controller.getAddCursesButton().addActionListener(addCourse -> {
-            addCourseFrame = new JFrame();
-            newFrame(addCourseFrame, true);
-            addCourseFrame.add(controller.getLabelAddCourse());
+            addCourseFrame = new JFStudentManagement(controller.getLabelAddCourse());
             coursesFrame.dispose();
         });
 
@@ -89,18 +81,14 @@ public class mainApp {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Invalid Grade");
             } finally {
-                inftoStundetFrame = new JFrame();
-                newFrame(inftoStundetFrame, true);
-                inftoStundetFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+                inftoStundetFrame = new JFStudentManagement(controller.getJPanelStundetInfo(student));
                 addCourseFrame.dispose();
             }
 
         });
         // Remove Course - Page
         controller.getRemoveCursesButton().addActionListener(removeCourse -> {
-            removeCourseFrame = new JFrame();
-            newFrame(removeCourseFrame, true);
-            removeCourseFrame.add(controller.getJLabelRemoveCourse());
+            removeCourseFrame = new JFStudentManagement(controller.getJLabelRemoveCourse());
             coursesFrame.dispose();
         });
 
@@ -110,19 +98,15 @@ public class mainApp {
                 JOptionPane.showMessageDialog(null, "Success");
             else
                 JOptionPane.showMessageDialog(null, "Course not exsit");
-            inftoStundetFrame = new JFrame();
-            newFrame(inftoStundetFrame, true);
-            inftoStundetFrame.add(controller.getJPanelStundetInfo(student), BorderLayout.CENTER);
+            inftoStundetFrame = new JFStudentManagement(controller.getJPanelStundetInfo(student));
             removeCourseFrame.dispose();
 
         });
 
         // Add Student - Page
         controller.getAddStudentButton().addActionListener(e -> {
-            addStudentFrame = new JFrame();
-            newFrame(addStudentFrame, true);
-            addStudentFrame.add(controller.getJPanelAddStundet());
-            frame.setVisible(false);
+            addStudentFrame = new JFStudentManagement(controller.getJPanelAddStundet());
+            menuFrame.setVisible(false);
 
         });
 
@@ -140,7 +124,7 @@ public class mainApp {
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null, exception.getMessage());
             } finally {
-                frame.setVisible(true);
+                menuFrame.setVisible(true);
                 addStudentFrame.dispose();
             }
 
@@ -150,20 +134,8 @@ public class mainApp {
             // Save
             controller.saveData("Data.dat");
             // Exit
-            frame.dispose();
+            menuFrame.dispose();
         });
-        frame.add(labelForMenu);
-        newFrame(frame, true);
-    }
-
-    public static void newFrame(JFrame frame, boolean bool) {
-        frame.setVisible(bool);
-        frame.setSize(450, 550);
-        frame.setResizable(false);
-        frame.setTitle("Student Mangement System");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(400, 70);
-        frame.getContentPane().setBackground(new Color(229, 230, 204));
     }
 
 }
