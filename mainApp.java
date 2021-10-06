@@ -27,9 +27,9 @@ public class mainApp {
 
         // Return - Menu
         controller.getMenuButton().addActionListener(menu -> {
-            //Saving data
+            // Saving data
             controller.saveData("Data.dat");
-            
+
             if (searchFrame != null)
                 searchFrame.dispose();
             if (inftoStundetFrame != null)

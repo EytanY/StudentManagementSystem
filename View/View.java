@@ -265,7 +265,9 @@ public class View {
 		panel.add(fatherNameTextField);
 		panel.add(motherNameTextField);
 		panel.add(emailTextField);
+
 		// Radio Button
+		setGender(Sex.Male);
 		maleRB.setBounds(130, 330, 100, 20);
 		maleRB.setFont(font);
 		maleRB.setFocusPainted(false);
