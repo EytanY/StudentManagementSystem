@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     public enum Sex {
         Male, Female
     }

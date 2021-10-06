@@ -1,8 +1,14 @@
 package Model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StudentMangement {
+public class StudentMangement implements Serializable {
     private ArrayList<Student> students;
 
     public StudentMangement() {
@@ -40,6 +46,25 @@ public class StudentMangement {
 
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+
+    public void save(String path) throws IOException, ClassNotFoundException {
+        ObjectOutputStream outFile = new ObjectOutputStream(new FileOutputStream(path));
+        StudentMangement system = new StudentMangement();
+        system.setStudents(this.students);
+        outFile.writeObject(system);
+        outFile.close();
+    }
+
+    public void update(String path) throws IOException, ClassNotFoundException {
+        ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(path));
+        StudentMangement system = (StudentMangement) inFile.readObject();
+        setStudents(system.getStudents());
+        inFile.close();
     }
 
 }

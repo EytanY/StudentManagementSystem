@@ -89,6 +89,24 @@ public class Controller {
         return new ImageIcon(newImgImage);
     }
 
+    // Save data in file
+    public void saveData(String path) {
+        try {
+            studentMangementSystem.save(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // update data from file
+    public void updateData(String path) {
+        try {
+            studentMangementSystem.update(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public JPanel getJPanelStundetInfo(Student student) {
         return view.getPanelInfo(student);
     }
