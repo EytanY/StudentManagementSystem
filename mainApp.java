@@ -27,6 +27,9 @@ public class mainApp {
 
         // Return - Menu
         controller.getMenuButton().addActionListener(menu -> {
+            //Saving data
+            controller.saveData("Data.dat");
+            
             if (searchFrame != null)
                 searchFrame.dispose();
             if (inftoStundetFrame != null)
@@ -36,7 +39,6 @@ public class mainApp {
             if (addStudentFrame != null)
                 addStudentFrame.dispose();
             menuFrame.setVisible(true);
-            // return menu
         });
 
         // Search Student - Page
