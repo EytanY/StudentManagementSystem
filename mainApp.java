@@ -114,9 +114,11 @@ public class mainApp {
         // Add Student - Enter
         controller.getAddStudentEnterButton().addActionListener(addStudentEnter -> {
             try {
-                if (controller.addStudent())
+                if (controller.addStudent()) {
                     JOptionPane.showMessageDialog(null, "Success");
-                else
+                    menuFrame.setVisible(true);
+                    addStudentFrame.dispose();
+                } else
                     JOptionPane.showMessageDialog(null, "Student's id already exsit");
             } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(null, "Enter integer number please");
@@ -124,9 +126,6 @@ public class mainApp {
                 JOptionPane.showMessageDialog(null, "Invalid birth date");
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null, exception.getMessage());
-            } finally {
-                menuFrame.setVisible(true);
-                addStudentFrame.dispose();
             }
 
         });
